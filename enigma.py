@@ -75,10 +75,21 @@ def gearselection3(selected):
 		valid = True
 	else: print("Invalid input.")
 
-def incrementGear(gear):
-	gear += 1
-	if gear > 25:
-		gear -= 26
+def incrementGear1(gear1or):
+	gear1or += 1
+	if gear1or > 25:
+		gear1or -= 26
+	return gear1or
+
+def incrementGear2(gear1or, gear2or):
+	if gear1or == 0:
+		gear2or += 1
+	return gear2or
+
+def incrementGear3(gear1or, gear2or, gear3or):
+	if gear2or == 0 and gear1or == 0:
+		gear3or += 1
+	return gear3or
 
 def encrypt(plaintext, gear1or, gear2or, gear3or):
 	print(plaintext)

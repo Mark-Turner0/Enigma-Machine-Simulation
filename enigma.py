@@ -104,10 +104,16 @@ def encrypt(plaintext, gear1or, gear2or, gear3or):
 	print(cipher3)
 
 	cipher3 = chr(gear3.index(cipher3) + 65 - gear3or)
+	if ord(cipher3) < 65:
+		cipher3 = chr(ord(cipher3) + 26)
 	print(cipher3)
 
 	cipher2 = chr(gear2.index(cipher3) + 65 - gear2or)
+	if ord(cipher2) < 65:
+		cipher2 = chr(ord(cipher2) + 26)
 	print(cipher2)
 
 	cipher1 = chr(gear1.index(cipher2) + 65 - gear1or)
+	if ord(cipher1) < 65:
+		cipher1 = chr(ord(cipher1) + 26)
 	return cipher1

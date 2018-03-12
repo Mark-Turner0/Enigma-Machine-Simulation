@@ -17,7 +17,7 @@ class questions(wx.Frame):
         self.panel= wx.Panel(self)
 
     def initUI(self):
-        self.SetTitle("Enigma Machine")
+        self.SetTitle("Enigma Setup")
         self.SetSize((370,150))
         self.Show(True)
         questionLabel = "Please select the first gear you would like to use (1-5):"

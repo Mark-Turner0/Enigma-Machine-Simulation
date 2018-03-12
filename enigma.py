@@ -77,54 +77,62 @@ def gearselection3(selected):
 
 def incrementGear1(gear1or):
 	gear1or += 1
-	if gear1or > 25:
-		gear1or -= 26
+	if gear1or > 24:
+		gear1or -= 25
 	return gear1or
 
 def incrementGear2(gear1or, gear2or):
 	if gear1or == 0:
 		gear2or += 1
+		if gear2or > 24:
+			gear2or -= 25
 	return gear2or
 
 def incrementGear3(gear1or, gear2or, gear3or):
 	if gear2or == 0 and gear1or == 0:
 		gear3or += 1
+		if gear3or > 24:
+			gear3or -= 25
 	return gear3or
 
 def encrypt(plaintext, gear1or, gear2or, gear3or):
-	print(plaintext)
+	print("Input: "+plaintext)
+	print("gear1or: "+str(gear1or))
+	print("gear2or: "+str(gear2or))
+	print("gear3or: "+str(gear3or))
 	cipher1 = gear1or + ord(plaintext) - 65
 	if cipher1 > 25:
 		cipher1 -= 26
 	cipher1 = gear1[cipher1]
-	print(cipher1)
+	print("After Gear 1: "+cipher1)
 
 	cipher2 = gear2or + ord(cipher1) - 65
 	if cipher2 > 25:
 		cipher2 -= 26
 	cipher2 = gear2[cipher2]
-	print(cipher2)
+	print("After Gear 2: "+cipher2)
 
 	cipher3 = gear3or + ord(cipher2) - 65
 	if cipher3 > 25:
 		cipher3 -= 26
 	cipher3 = gear3[cipher3]
-	print(cipher3)
+	print("After Gear 3: "+cipher3)
 
 	cipher3 = chr(90 - ord(cipher3) + 65)
-	print(cipher3)
+	print("After the reflector: "+cipher3)
 
 	cipher3 = chr(gear3.index(cipher3) + 65 - gear3or)
 	if ord(cipher3) < 65:
 		cipher3 = chr(ord(cipher3) + 26)
-	print(cipher3)
+	print("After Gear 3 again: "+cipher3)
 
 	cipher2 = chr(gear2.index(cipher3) + 65 - gear2or)
 	if ord(cipher2) < 65:
 		cipher2 = chr(ord(cipher2) + 26)
-	print(cipher2)
+	print("After Gear 2 again: "+cipher2)
 
 	cipher1 = chr(gear1.index(cipher2) + 65 - gear1or)
 	if ord(cipher1) < 65:
 		cipher1 = chr(ord(cipher1) + 26)
+	print("After Gear 1 again: "+cipher1)
 	return cipher1

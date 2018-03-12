@@ -4,8 +4,9 @@ import enigma as en
 
 def main(gear1or, gear2or, gear3or, plugSets):	
 	pygame.init()
+	pygame.font.init()
 	global display
-	display = pygame.display.set_mode((1200, 800))
+	display = pygame.display.set_mode((1200, 600))
 	pygame.display.set_caption("Enigma Machine")
 	display.fill((48,48,48))
 	display.blit(pygame.image.load("imgs/side.png"), (0,0))
@@ -20,10 +21,16 @@ def main(gear1or, gear2or, gear3or, plugSets):
 				pygame.quit()
 				sys.exit()
 
-			if event.type == pygame.KEYDOWN:
-				print(event.key)
-				output = en.encrypt(chr(event.key).upper(), gear1or, gear2or, gear3or)
-				dict["colour{0}".format(output)] = (255,255,150)
+			if event.type == pygame.KEYDOWN and event.key < 123 and event.key > 96:
+				inputChar = chr(event.key).upper()
+				if inputChar in plugSets:
+					if plugSets.index(inputChar) % 2 == 0:
+						inputChar = plugSets[plugSets.index(inputChar) + 1]
+					else:
+						inputChar = plugSets[plugSets.index(inputChar) - 1]
+				print(inputChar)
+				output = en.encrypt(inputChar, gear1or, gear2or, gear3or)
+				dict["colour{0}".format(output)] = (255,255,0)
 				gear1or = en.incrementGear1(gear1or)
 				gear2or = en.incrementGear2(gear1or, gear2or)
 				gear3or = en.incrementGear3(gear1or, gear2or, gear3or)
@@ -32,15 +39,28 @@ def main(gear1or, gear2or, gear3or, plugSets):
 				for i in range(65,91):
 					dict["colour{0}".format(chr(i))] = (255,255,255)
 
+			if gear1or < 9: gear1cord = 277.5
+			else: gear1cord = 256
+			if gear2or < 9: gear2cord = 400
+			else: gear2cord = 380
+			if gear3or < 9: gear3cord = 522.5
+			else: gear3cord = 475 
+
 			pygame.draw.circle(display, dict["colourQ"], (100, 250), 49, 0)
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/Q.png").convert_alpha(), (100,100)), (50,200))
 			pygame.draw.circle(display, dict["colourW"], (225, 250), 49, 0)
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/W.png").convert_alpha(), (100,100)), (175,200)) #FIX
 			pygame.draw.circle(display, dict["colourE"], (350, 250), 49, 0)
+			display.blit(pygame.transform.scale(pygame.image.load("imgs/gearChange.png").convert_alpha(), (100,163)), (237.5,20))
+			display.blit(pygame.font.SysFont('Arial', 50).render(str(gear1or+1),1,(0,0,0)),(gear1cord,70))
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/E.png").convert_alpha(), (100,100)), (300,200))
 			pygame.draw.circle(display, dict["colourR"], (475, 250), 49, 0)
+			display.blit(pygame.transform.scale(pygame.image.load("imgs/gearChange.png").convert_alpha(), (100,163)), (362.5,20))
+			display.blit(pygame.font.SysFont('Arial', 50).render(str(gear2or+1),1,(0,0,0)),(gear2cord,70))
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/R.png").convert_alpha(), (100,100)), (425,200)) #FIX
 			pygame.draw.circle(display, dict["colourT"], (600, 250), 49, 0)
+			display.blit(pygame.transform.scale(pygame.image.load("imgs/gearChange.png").convert_alpha(), (100,163)), (487.5,20))
+			display.blit(pygame.font.SysFont('Arial', 50).render(str(gear3or+1),1,(0,0,0)),(gear3cord,70))
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/T.png").convert_alpha(), (100,100)), (550,200))
 			pygame.draw.circle(display, dict["colourZ"], (725, 250), 49, 0)
 			display.blit(pygame.transform.scale(pygame.image.load("imgs/Z.png").convert_alpha(), (100,100)), (675,200))

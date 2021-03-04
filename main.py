@@ -22,7 +22,7 @@ class questions(wx.Frame):
         self.Show(True)
         questionLabel = "Please select the first gear you would like to use (1-5):"
         self.question = wx.StaticText(self.panel, label=questionLabel,pos=(0,0))
-        self.answerBox = wx.TextCtrl(self.panel, size=(340,22.5), pos=(15,50))
+        self.answerBox = wx.TextCtrl(self.panel, size=(340,23), pos=(15,50))
         self.submitButton = wx.Button(self.panel, -1, "Submit", pos=(40,100))
         self.Bind(wx.EVT_BUTTON, self.onSubmit, id=self.submitButton.GetId())
         self.quitButton = wx.Button(self.panel, -1, "Quit", pos=(240,100))

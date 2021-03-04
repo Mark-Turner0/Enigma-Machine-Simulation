@@ -4,7 +4,7 @@ A basic simulation of the Enigma machine used by the Wehrmacht. You select the g
 
 ## Usage
 
-`python main.py` or `python3 main.py`
+`python3 main.py`
 
 ## Prerequisites
 
@@ -18,9 +18,10 @@ A basic simulation of the Enigma machine used by the Wehrmacht. You select the g
 * Reimplementing sound
 * The icons look really low-res, despite them not being
 
-# Acknowledgements
+## Acknowledgements
 
 Graphics made using [Inkscape](https://inkscape.org)
+
 Wooden texture from [GIMP](https://www.gimp.org/)
 
 
